@@ -37,6 +37,3 @@ $ make set path=ABC173/A
 ```
 $ make clean
 ```
-
-For more information, please see Makefile.
-https://github.com/siu-issiki/cpp-docker/blob/master/Makefile
