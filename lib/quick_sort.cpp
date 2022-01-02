@@ -40,12 +40,6 @@ void quick_sort(int A[], int left, int right){
 }
 
 int main(){
-  //int n;
-  //cin >> n;
-  //int A[n];
-  //for (int i = 0; i < n;i++){
-  //  cin >> A[i];
-  //}
   int n = 8;
   int A[8] = {4, 1, 2, 6, 9, 7, 3, 5};
   quick_sort(A, 0, n - 1);
