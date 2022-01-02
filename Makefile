@@ -26,6 +26,10 @@ build: rule
 run: rule
 	$(COMPOSE) run cpp sh -c 'g++ ./src/$(path)/main.cpp -o a.out; ./a.out; rm a.out'
 
+run_lib: 
+	echo ${file} > tmppath
+	$(COMPOSE) run cpp sh -c 'g++ ./lib/$(file).cpp -o a.out; ./a.out;'
+
 test: rule
 	$(COMPOSE) run cpp sh -c 'g++ ./src/$(path)/main.cpp -o a.out; ./lib/test.sh $(path); rm a.out'
 
