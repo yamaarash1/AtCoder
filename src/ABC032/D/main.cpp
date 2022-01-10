@@ -17,14 +17,9 @@ ll v[209], w[209];
 
 ll dfs(ll i, ll sum){
   ll res;
-  if (i == N){
+  if(i == N){
     res = 0;
-  }else if(sum + w[i] <= M){
-    res = max(dfs(i + 1, sum + w[i]) + v[i], dfs(i + 1, sum));
-  }else{
-    res = dfs(i + 1, sum);
   }
-  return res;
 }
 int main() { 
   cin >> N >> M;
@@ -35,3 +30,16 @@ int main() {
   cout << res << endl;
   return 0;
 }
+
+
+//ll dfs(ll i, ll sum){
+//  ll res;
+//  if (i == N){
+//    res = 0;
+//  }else if(sum + w[i] <= M){
+//    res = max(dfs(i + 1, sum + w[i]) + v[i], dfs(i + 1, sum));
+//  }else{
+//    res = dfs(i + 1, sum);
+//  }
+//  return res;
+//}
