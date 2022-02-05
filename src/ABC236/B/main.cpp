@@ -12,21 +12,25 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-constexpr int size = 5;
-int n = 5;
-void rotation(string str[n][n])
-{
-}
-int main(){
-  string test1[2][2] = {
-    ".*", 
-    ".*"
-  };
-  string test2[5][5] = {
-    "A...A", 
-    ".A.A.",
-    "..A..",
-    ".A.A.",
-    "A...A",};
+
+int main() {
+  int n;
+  cin >> n;
+  map<int, int> card;
+  for (int i = 0; i <= n;i++){
+    card[i] = 0;
+  }
+  for (int i = 0; i < 4 * n - 1;i++){
+    int m;
+    cin >> m;
+    card[m]++;
+  }
+  for (int i = 1; i<=n; i++){
+    if (card[i] != 4)
+    {
+      cout << i << endl;
+      break;
+    }
+  }
   return 0;
 }

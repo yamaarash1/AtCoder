@@ -12,21 +12,17 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-constexpr int size = 5;
-int n = 5;
-void rotation(string str[n][n])
-{
-}
-int main(){
-  string test1[2][2] = {
-    ".*", 
-    ".*"
-  };
-  string test2[5][5] = {
-    "A...A", 
-    ".A.A.",
-    "..A..",
-    ".A.A.",
-    "A...A",};
+
+int main() {
+  long double n;
+  cin >> n;
+  long double left = pow(2, n);
+  long double right = n * n;
+  if(left > right){
+    cout << "Yes" << endl;
+  }else{
+    cout << "No" << endl;
+  }
+
   return 0;
 }
