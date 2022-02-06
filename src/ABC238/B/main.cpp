@@ -19,14 +19,34 @@ int main() {
   int A[n+1];
   int B[n+1];
   A[0] = 0;
+  B[0] = 0;
   for (int i = 1; i <= n; i++)
   {
-    
+    cin >> A[i];
+    B[i] = 0;
   }
-  for (int i = 0; i <= n;i++){
-    for (int j = i; i <= n; j++){
-      B[i] += B[i];
+  for (int i = 1; i <= n;i++){
+    for (int j = i; j <= n; j++){
+      B[i] += A[j];
     }
   }
+  for (int i = 0; i <= n;i++){
+    B[i] = B[i] % 360;
+  }
+  sort(B, B + n+1);
+  int ans = 0;
+  int sa;
+  for (int i = 0; i < n; i++)
+  {
+    int sa = B[i + 1] - B[i];
+    if (sa>ans){
+      ans = sa;
+    }
+  }
+  sa = 360 - B[n];
+  if (sa>ans){
+      ans = sa;
+  }
+  cout << ans << endl;
   return 0;
 }
