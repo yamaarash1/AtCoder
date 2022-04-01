@@ -9,6 +9,10 @@
     "deque": "cpp",
     "string": "cpp",
     "cmath": "cpp",
-    "limits": "cpp"
+    "limits": "cpp",
+    "string_view": "cpp",
+    "unordered_map": "cpp",
+    "array": "cpp",
+    "initializer_list": "cpp"
   }
 }
