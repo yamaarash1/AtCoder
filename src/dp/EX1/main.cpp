@@ -14,6 +14,7 @@ using namespace std;
 typedef long long ll;
 
 int main() {
+  //nまでのサイコロの総和の一覧を表示するプログラム（DPを使う）
   int n;
   cin >> n;
   int m = n * 6; //サイコロの数のmaxの値
