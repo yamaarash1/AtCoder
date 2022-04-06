@@ -50,7 +50,7 @@ int main() {
     {
       if(i * 6 >= j){
         if(j >= i){
-          cout << "「" << j << "」のでる確率： " << dp[i][j] << endl;
+          cout << "「" << j << "」のでる回数： " << dp[i][j] << endl;
         }
       }
     }
