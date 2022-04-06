@@ -43,12 +43,15 @@ int main() {
     }
   }
 
+  cout << "※0回の場合は表示しない" << endl;
   for (int i = 1; i <= n;i++){
     cout << i << "個の時：" << endl;
     for (int j = 1; j <= m; j++)
     {
       if(i * 6 >= j){
-      cout << "「" << j << "」のでる確率： " << dp[i][j] << endl;
+        if(j >= i){
+          cout << "「" << j << "」のでる確率： " << dp[i][j] << endl;
+        }
       }
     }
   }
