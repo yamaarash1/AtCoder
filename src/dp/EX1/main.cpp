@@ -18,7 +18,7 @@ int main() {
   int n;
   cin >> n;
   int m = n * 6; //サイコロの数のmaxの値
-  int dp[n + 1][m]; //サイコロn個の時、合計値がmになる個数
+  int dp[n + 1][m + 1]; //サイコロn個の時、合計値がmになる個数
 
   for (int i = 0; i <= n; i++){
     for (int j = 0; j <= m; j++){
