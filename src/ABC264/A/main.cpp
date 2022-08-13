@@ -14,7 +14,12 @@ using namespace std;
 typedef long long ll;
 
 int main() {
-  
-  
+  string a = "atcoder";
+  int l, r;
+  cin >> l >> r;
+  for (int i = l - 1; i < r;i++){
+    cout << a[i];
+  }
+  cout << endl;
   return 0;
 }
