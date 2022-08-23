@@ -34,25 +34,39 @@ int main() {
       cin >> b[i][j];
     }
   }
-  int c[100][100];
-  c = a - b;
+  for (int i = 0; i < (1<<ah); i++){
+    for (int j = 0; j < (1<<aw); j++){
+      vector<int> hs, ws;
+      //bit全探索で行と列の残っている行と列番号をpush
+      for (int k = 0; k < ah; k++){
+        if((i & (1<<k)) == 0) {
+          hs.push_back(k);
+        }
+      }
+      for (int k = 0; k < aw; k++){
+        if((j & (1<<k)) == 0) {
+          ws.push_back(k);
+        }
+      }
+      //長さが異なる場合は絶対違うので次へ
+      if(hs.size() != bh || ws.size() != bw)
+        continue;
 
-  //スタート地点を設定
-  int sh, sw;
-  bool ok = false;
-  for (int i = 0; i < ah; i++) {
-    for (int j = 0; j < aw;j++){
-      if(a[i][j] == b[0][0]) {
-        sh = i;
-        sw = j;
-        ok = true;
-        break;
+      bool ok = true;
+      for (int x = 0; x < bh; x++){
+        for (int y = 0; y < bw; y++){
+          if(a[hs[x]][ws[y]] != b[x][y]) {
+            ok = false;
+            break;
+          }
+        }
+      }
+      if(ok) {
+        cout << "Yes" << endl;
+        return 0;
       }
     }
-    if(ok){
-      break;
-    }
   }
-
+  cout << "No" << endl;
   return 0;
 }
