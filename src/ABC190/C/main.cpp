@@ -12,52 +12,42 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-
-string toBinary(int n, int k){
-    string r;
-    int count = 0;
-    while (count < k)
-    {
-      r += (n % 2 == 0 ? "0" : "1");
-      n /= 2;
-      count++;
-    }
-    return r;
-}
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
   int n, m;
   cin >> n >> m;
-  pair<int, int> ab[m];
-  rep(i, m) cin >> ab[i].first >> ab[i].second;
+  int a[m], b[m];
+  for (int i = 0; i < m; i++){
+    cin >> a[i] >> b[i];
+  }
   int k;
   cin >> k;
-  int cd[k][2];
-  rep(i, k) cin >> cd[i][0] >> cd[i][1];
-
-  bool flag[n+1];
-  rep(i, n+1) flag[i] = false;
+  int c[k], d[k];
   int ans = 0;
-  int len = (int)pow(2, k);
-  for (int i = 0; i < len; i++)
+  for (int i = 0; i < k; i++)
   {
-    string bit = toBinary(i, k);
-    for (int j = 0; j < k; j++){
-      int num = (int)bit[j] - '0';
-      flag[cd[j][num]] = true;
-    }
+    cin >> c[i] >> d[i];
+  }
+  for (int bit = 0; bit < (1 << k); bit++) {
+    vector<bool> flag(n);
     int tmp = 0;
-    for (int j = 0; j < m;j++){
-      if(flag[ab[j].first] ==true && flag[ab[j].second] ==true){
+    for (int i = 0; i < k; i++)
+    {
+      if(bit & (1 << i)) {
+        flag[c[i]] = true;
+      } else { 
+        flag[d[i]] = true;
+      }
+    }
+    for (int i = 0; i < m; i++){
+      if(flag[a[i]] && flag[b[i]]) {
         tmp++;
       }
     }
-    if(tmp>ans){
-      ans = tmp;
-    }
-    rep(i, n+1) flag[i] = false;
+    ans = max(tmp, ans);
   }
   cout << ans << endl;
-
   return 0;
 }
