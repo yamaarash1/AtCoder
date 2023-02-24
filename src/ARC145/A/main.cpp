@@ -12,15 +12,21 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
   int n;
   string s;
   cin >> n >> s;
-  if ((s[0] == 'B' || s[n - 1] == 'A') && s != "BA") {
-    cout << "Yes" << endl;
-  } else {
+  if(s == "BA" || s == "AB") {
     cout << "No" << endl;
+    return 0;
   }
+  if(s[0] == 'A' && s[n-1] == 'B') {
+    cout << "No" << endl;
+    return 0;
+  }
+  cout << "Yes" << endl;
   return 0;
 }

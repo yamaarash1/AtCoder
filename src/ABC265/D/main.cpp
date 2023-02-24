@@ -12,25 +12,41 @@
 using namespace std;
 #define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+vector<ll> sum;
+
+pair<bool, ll> check(ll t) {
+  vector<ll>::iterator position = lower_bound(sum.begin(), sum.end(), t);
+  ll idx_lower = position - sum.begin();
+  if(sum[idx_lower] == t) {
+    return {true, idx_lower};
+  } else{
+    return {false, 0};
+  }
+}
 
 int main() {
   ll n, p, q, r;
   cin >> n >> p >> q >> r;
-  ll a[n];
-  set<ll> s;
-  ll s_a = 0;
-  s.insert(s_a);
-  for (ll i = 0; i < n; i++)
-  {
+  ll s = 0;
+  sum.push_back(s);
+  for (ll i = 0; i < n; i++) {
     ll a;
     cin >> a;
-    s_a += a;
-    s.insert(s_a);
+    s += a;
+    sum.push_back(s);
   }
-  for (auto tar : s){
-    if(s.find(tar+p) != s.end() && s.find(tar+p+q) != s.end() && s.find(tar+p+q+r) != s.end() ){
-      cout << "Yes" << endl;
-      return 0;
+  sort(sum.begin(), sum.end());
+  pair<bool, ll> res = check(s - r);
+  if (res.first) {
+    res = check(sum[res.second+1] - q);
+    if(res.first) {
+      res = check(sum[res.second+1] - p);
+      if(res.first) {
+        cout << "Yes" << endl;
+        return 0;
+      }
     }
   }
   cout << "No" << endl;

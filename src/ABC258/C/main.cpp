@@ -10,27 +10,28 @@
 #include <set>
 #include <iomanip>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
-  int n, q;
+  ll n, q;
   string s;
   cin >> n >> q >> s;
-  int count = 0;
-  for (int i = 0; i < q; i++)
-  {
-    int t, x;
+  ll rotate = 0;
+  while(q--){
+    ll t, x;
     cin >> t >> x;
-    if (t == 1) {
-      count += x;
-    }
-    else
+    if (t == 1)
     {
-      int a = (x - count) % n;
-      cout << x << " " << count << " " << n << endl;
-      cout << s[a] << endl;
+      rotate += x;
+    } else {
+      if((x - 1 - rotate) % n >= 0) 
+        cout << s[(x - 1 - rotate) % n] << endl;
+      else
+        cout << s[(x - 1 - rotate) % n + n] << endl;
     }
   }
-    return 0;
+  return 0;
 }

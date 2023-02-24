@@ -12,49 +12,45 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
-  int h[3], w[3];
-  int cell[3][3];
-  int count = 0;
-  cin >> h[0] >> h[1] >> h[2] >> w[0] >> w[1] >> w[2];
-  for (int i = 1; i < 30; i++){
-    for (int j = 1; j < 30; j++){
-      for (int k = 1; k < 30; k++){
-        for (int l = 1; l < 30;l++){
-          cell[0][0] = i;
-          cell[0][1] = j;
-          cell[1][0] = k;
-          cell[1][1] = l;
-          if(i+k >= w[0]) {
+int main() { 
+  int h1,h2,h3,w1,w2,w3;
+  cin >> h1 >> h2 >> h3 >> w1 >> w2 >> w3;
+  int ans = 0;
+  for (int i = 1; i <= 28; i++){
+    for (int j = 1; j <= 28; j++){
+      for (int k = 1; k <= 28; k++){
+        for (int l = 1; l <= 28; l++){
+          int a = i;
+          int b = j;
+          int d = k;
+          int e = l;
+          int c = h1 - a - b;
+          int f = h2 - d - e;
+          int g = w1 - a - d;
+          int h = w2 - b - e;
+          if(c < 1){
             continue;
           }
-          if(j+l >= w[1]){
+          if(f < 1) {
             continue;
           }
-          if(i+j >= h[0]){
+          if(g < 1) {
             continue;
           }
-          if(k+l >= h[1]){
+          if(h < 1) {
             continue;
           }
-          cell[0][2] = h[0] - i - j;
-          cell[1][2] = h[1] - k - l;
-          cell[2][0] = w[0] - i - k;
-          cell[2][1] = w[1] - j - l;
-          cell[2][2] = h[2] - cell[2][0] - cell[2][1];
-          if(cell[2][2] <= 0) {
-            continue;
+          if (- h3 + g + h == - w3 + c + f) {
+            if(h3 - g - h >= 1)
+              ans++;
           }
-          if (h[2] - cell[2][0] - cell[2][1] != w[2] - cell[0][2] - cell[1][2])
-          {
-            continue;
-          }
-          count++;
         }
       }
     }
   }
-  cout << count << endl;
+  cout << ans << endl;
   return 0;
 }

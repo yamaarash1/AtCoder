@@ -18,36 +18,23 @@ typedef long long ll;
 int main() {
   int n;
   cin >> n;
-  int p[n];
-  for (int i = 0; i < n; i++) {
+  vector<int> p(n, 0);
+  for (int i = 0; i < n;i++){
     cin >> p[i];
   }
-  vector<int> order(n);
-  for (int i = 0; i < n; i++){
-      if (p[i] - 1 - i < 0)
-      {
-        int o = p[i] - 1 - i + n;
-        order[o]++;
-      } else {
-      order[p[i] - 1 - i]++;
-    }
-    order[p[i]]++;
-    if(p[i] + 1 >= n) {
-      order[0]++;
-    }else {
-      order[p[i] + 1]++;
-    }
-    for (int j = 0; j < n; j++)
+  vector<int> c(n, 0); //何回回したか
+  for (int i = 0; i < n; i++)
   {
-    cout << j << ": " << order[j] << endl;
-  }
-  cout << "--------" << endl;
+    int j = i;
+    c[(p[i] - 1 - j + n) % n]++;
+    c[(p[i] - j + n) % n]++;
+    c[(p[i] + 1 - j + n) % n]++;
   }
   int ans = 0;
   for (int i = 0; i < n; i++)
   {
-    ans = max(ans, order[i]);
+    ans = max(ans, c[i]);
   }
-  cout << ans << endl;
+  cout << ans <<endl;
   return 0;
 }

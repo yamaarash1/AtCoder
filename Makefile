@@ -14,8 +14,13 @@ new:
 
 set:
 	echo ${path} > tmppath
-	code ./src/${path}/main.cpp ./src/${path}/*.in ./src/${path}/*.out
 
+#code ./src/${path}/main.cpp ./src/${path}/*.in ./src/${path}/*.out
+
+java: rule
+	javac ./src/$(path)/main.java 
+	java -classpath ./src/$(path) Main
+	
 add_test: rule
 	$(eval testcount := $(shell ./lib/add_test.sh $(path)))
 	code ./src/${path}/${testcount}.in ./src/${path}/${testcount}.out

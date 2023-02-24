@@ -12,28 +12,46 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
-	int n,k;
-	cin>>n>>k;
-  vector<int> a;
-  vector<vector<int>> b(k);
-  for (int i = 0; i < n; i++)
+  int q;
+  cin >> q;
+  map<int, int> cnt;
+  set<int> s;
+  while (q--)
   {
-    int x;
-    a.push_back(x);
-    b[i % k].push_back(a[i]);
+    int n, x, c;
+    cin >> n;
+    if (n == 1)
+    {
+      cin >> x;
+      if (cnt[x] == 0)
+      {
+        s.insert(x);
+      }
+      cnt[x]++;
+    }
+    else if (n == 2)
+    {
+      cin >> x >> c;
+      if(cnt[x] <= c) {
+        cnt[x] = 0;
+        s.erase(x);
+      }
+      else {
+        cnt[x] -= c;
+      }
+    }
+    else
+    {
+      auto itr = s.begin();
+      auto r_iter = s.rbegin();
+      int start = *itr;
+      int end = *r_iter;
+      cout << end - start << endl;
+    }
   }
-  sort(a.begin(), a.end());
-  for(int i=0;i<k;i++){
-		sort(b[i].rbegin(),b[i].rend());
-	}
-	vector<int> na;
-	for(int i=0;i<n;i++){
-		na.push_back(b[i%k].back());
-		b[i%k].pop_back();
-	}
-	if(a==na)cout<<"Yes"<<endl;
-	else cout<<"No"<<endl;
   return 0;
 }
