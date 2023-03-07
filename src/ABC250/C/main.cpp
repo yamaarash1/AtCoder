@@ -10,29 +10,42 @@
 #include <set>
 #include <iomanip>
 using namespace std;
-#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
-  ll n,q,a,b,x;
+  int n, q;
   cin >> n >> q;
-  ll ball[n+1]; //iのボールはball[i]番目
-  ll order[n+1];//i番目のボールはorder[i]
-  for (ll i = 1; i <= n; i++)
+  int a[n+1], b[n+1];
+  for (int i = 1; i <= n; i++)
   {
-    ball[i] = i;
-    order[i] = i;
+    a[i] = i;//number->order, iはj番目
+    b[i] = i;//order->number, i番目はj
   }
-  for (ll i = 0; i < q; i++){
+  while (q--)
+  {
+    int x;
     cin >> x;
-    a = ball[x];
-    b = a != n ? a + 1 : a - 1;
-    swap(order[a], order[b]);
-    swap(ball[order[a]], ball[order[b]]);
+    if(a[x] == n) {
+      int tmp_a = b[a[x] - 1];
+      int tmp_b = b[a[x] - 1];
+      swap(a[x], a[tmp_a]);
+      swap(b[x], b[tmp_b]);
+    } else {
+      int tmp_a = b[a[x] + 1];
+      int tmp_b = b[a[x] + 1];
+      swap(a[x], a[tmp_a]);
+      swap(b[x], b[tmp_b]);
+    }
+    //for (int i = 1; i <= n;i++){
+    //  cout << b[i] << " ";
+    //}
+    //cout << endl;
   }
-
-  for (ll i = 1; i <= n;i++){
-    cout << order[i] << " ";
+  for (int i = 1; i <= n;i++){
+    cout << b[i] << " ";
   }
   cout << endl;
   return 0;

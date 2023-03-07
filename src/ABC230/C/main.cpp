@@ -12,32 +12,27 @@
 using namespace std;
 #define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+ll n,a,b,p,q,r,s;
+
+bool func (ll x, ll y){
+  return y == (x-a) + b;
+}
+
+bool m_func(ll x, ll y){
+  return y == - (x-a) + b;
+}
 
 int main() {
-  ll n, a, b, p, q, r, s;
   cin >> n >> a >> b >> p >> q >> r >> s;
-  pair<ll, ll> st;
-  ll x, y;
-
-  for (ll i = 0; i < q - p + 1; i++) {
-    for (ll j = 0; j < s - r + 1; j++) {
-      if(i > a){
-        x = a + (i - a);
-      }else{
-        x = a + (a - i);
-      }
-      if(j > b){
-        y = b + (j - b);
-      }else{
-        y = b + (b - j);
-      }
-      if(i == x && j == y){
-        cout << "#";
-      }else{
-        cout << ".";
-      }
+  for(ll i = p; i <= q;i++){
+    for(ll j = r; j <= s;j++){
+      if(func(i,j) || m_func(i,j))cout << "#";
+      else cout << ".";
     }
     cout << endl;
   }
+  cout << endl;
   return 0;
 }

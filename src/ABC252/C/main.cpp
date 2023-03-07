@@ -12,37 +12,34 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
+int main() { 
   int n;
   cin >> n;
-  int same[10][10]; //iがj番目に出てくる回数はsame[i][j]
-  //初期化
-  string s;
-  for (int i = 0; i < 10;i++){
+  string s[n];
+  for (int i = 0;i<n;i++){
+    cin >> s[i];
+  }
+  vector<int> time(10, 0);
+  map<int, multiset<int>> m;
+  for (int i = 0; i < n;i++){
     for (int j = 0; j < 10;j++){
-      same[i][j] = 0;
+      m[s[i][j] - '0'].insert(j);
     }
   }
-
-  for (int i = 0; i < n; i++)
-  {
-    cin >> s;
-    for (int j = 0; j < s.length(); j++)
-    {
-      same[s[j] - '0'][j]++;
+  for (int i = 0; i < 10;i++){
+    int max_order = 0;
+    for(auto c : m[i]){
+      max_order = max(max_order, c);
+      time[i] = 10 * (m[i].count(c) - 1);
     }
+    time[i] += max_order;
   }
-
-  int ans = n * 10 + 999;
-  for (int i = 0; i < 10; i++)
-  {
-    int time = 0;
-    for (int j = 0; j < 10; j++)
-    {
-      time = max(time, 10 * (same[i][j] - 1) + j);
-    }
-    ans = min(ans, time);
+  int ans = 2147483647;
+  for (int i = 0; i < 10;i++){
+    ans = min(ans, time[i]);
   }
   cout << ans << endl;
   return 0;
