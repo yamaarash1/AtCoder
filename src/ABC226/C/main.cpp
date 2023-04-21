@@ -10,35 +10,44 @@
 #include <set>
 #include <iomanip>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+ll n;
+ll t[200009], k[200009];
+vector<vector<ll>> a(200009);
+ll ans = 0;
+vector<bool> visited(200009, false);
 
-ll T[200009];
-ll K[200009];
-vector<int>A[200009];
-bool pass[200009];
+void dfs(ll m){
+  //cout << m << ": " << ans << endl;
+  if (visited[m]) {
+    return;
+  }
+  ans += t[m];
+  visited[m] = true;
+  if (k[m] == 0) {
+    return;
+  }
+  for (ll i = 0; i < k[m];i++){
+    dfs(a[m][i]);
+  }
+  return;
+}
 
-int main() {
-  int N, x;
-	for(int i = 0;i<200009;i++) pass[i] = false;
-	cin >> N;
-	for (int i = 1; i <= N;i++){
-		cin >> T[i] >> K[i];
-		for (int j = 0; j < K[i]; j++){
-			cin >> x;
-			A[i].push_back(x);
-		}
-	}
-  ll time = 0;
-  pass[N] = true;
-  for (int i = N; i > 0;i--) {
-    if (pass[i] == true) {
-      for (int j = 0; j < A[i].size(); j++){
-          pass[A[i][j]] = true;   
-      }
-      time += T[i];
+int main()
+{
+  cin >> n;
+  for (ll i = 0; i < n;i++){
+    cin >> t[i] >> k[i];
+    for (ll j = 0; j < k[i];j++){
+      ll x;
+      cin >> x;
+      a[i].push_back(x - 1);
     }
   }
-  cout << time << endl;
+  dfs(n - 1);
+  cout << ans << endl;
   return 0;
 }

@@ -12,42 +12,37 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
-  int n, k;
+int main() { 
+  int n,k;
   cin >> n >> k;
   string s[n];
+  map<char, int> m;
   for (int i = 0; i < n; i++)
   {
     cin >> s[i];
   }
-  int limit = pow(2, n);
   int ans = 0;
-  for (int i = 0; i < limit; i++)
+  for (int bit = 0; bit < (1 << n); bit++)
   {
-    map<char, int> count;
-    int tmp = 0;
-    for (int j = 0; j < n; j++)
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
     {
-      if(1 & (i>>j)) {
-        for (int k = 0; k < s[j].length(); k++){
-          count[s[j][k]]++;
+      if (bit & (1<<i)) {
+        for (int j = 0; j < s[i].size(); j++) {
+          m[s[i][j]]++;
         }
       }
     }
-    char x = 'a';
-    while(x <= 'z')
-    {
-      if (count[x] == k)
-      {
-        tmp++;
+    for(auto x: m) {
+      if(x.second == k){
+        cnt++;
       }
-      x++;
     }
-    if(tmp > ans){
-      ans = tmp;
-    }
-    count.clear();
+    ans = max(ans, cnt);
+    m.clear();
   }
   cout << ans << endl;
   return 0;

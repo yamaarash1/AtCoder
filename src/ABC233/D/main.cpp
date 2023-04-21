@@ -10,38 +10,30 @@
 #include <set>
 #include <iomanip>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
-  int n, k;
+  ll n, k;
   cin >> n >> k;
-  int A[n];
-  int dp[n][n];
-  for (int i = 0; i < n; i++)
+  ll a[n];
+  for (ll i = 0; i < n; i++)
   {
-    for (int j = 0; j < n;j++){
-      dp[i][j] = 0;
-    }
+    cin >> a[i];
   }
-  for (int i = 0; i < n;i++){
-    cin >> A[i];
-    dp[i][i] = A[i];
-  }
-  for (int i = 0; i < n;i++){
-    for (int j = i+1; j < n;j++){
-      if(i == j)
-        continue;
-      dp[i][j] = dp[i][j - 1] + A[j];
-    }
-  }
-  int ans = 0;
-  for (int i = 0; i < n; i++)
+  ll sum[n+1];
+  sum[0] = 0;
+  for (ll i = 1; i <= n; i++)
   {
-    for (int j = i; j < n;j++){
-      if(dp[i][j] == k)
-        ans++;
-    }
+    sum[i] = sum[i - 1] + a[i - 1];
+  }
+  map<ll, ll> m;
+  ll ans = 0;
+  for (ll i = 1; i <= n; i++) {
+    m[sum[i-1]]++;
+    ans += m[sum[i] - k];
   }
   cout << ans << endl;
   return 0;

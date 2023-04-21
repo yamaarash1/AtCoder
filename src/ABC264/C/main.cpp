@@ -12,53 +12,52 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-
-int dfs(int s, int e) {
-
-}
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
-  int ah, aw;
-  cin >> ah >> aw;
-  int a[ah][aw];
-  for (int i = 0; i < ah;i++){
-    for (int j = 0; j < aw;j++){
+  int h1, w1;
+  cin >> h1 >> w1;
+  int a[15][15], b[15][15];
+  for(int i = 0; i < h1; i++) {
+    for(int j = 0; j < w1; j++) {
       cin >> a[i][j];
     }
   }
-  int bh, bw;
-  cin >> bh >> bw;
-  int b[bh][bw];
-  for (int i = 0; i < bh;i++){
-    for (int j = 0; j < bw;j++){
+  int h2, w2;
+  cin >> h2 >> w2;
+  for(int i = 0; i < h2; i++) {
+    for(int j = 0; j < w2; j++) {
       cin >> b[i][j];
     }
   }
-  for (int i = 0; i < (1<<ah); i++){
-    for (int j = 0; j < (1<<aw); j++){
-      vector<int> hs, ws;
-      //bit全探索で行と列の残っている行と列番号をpush
-      for (int k = 0; k < ah; k++){
-        if((i & (1<<k)) == 0) {
-          hs.push_back(k);
+  for (int h_b = 0; h_b < (1<<h1); h_b++) {
+    for (int w_b = 0; w_b < (1<<w1); w_b++) {
+      vector<int> H;
+      vector<int> W;
+      for (int i = 0; i < h1; ++i)
+      {
+        if (h_b & (1 << i))
+        {
+          H.push_back(i);
         }
       }
-      for (int k = 0; k < aw; k++){
-        if((j & (1<<k)) == 0) {
-          ws.push_back(k);
+      for (int i = 0; i < w1; ++i)
+      {
+        if (w_b & (1 << i))
+        {
+          W.push_back(i);
         }
       }
-      //長さが異なる場合は絶対違うので次へ
-      if(hs.size() != bh || ws.size() != bw)
-        continue;
-
+      if(H.size() != h2) continue;
+      if(W.size() != w2) continue;
       bool ok = true;
-      for (int x = 0; x < bh; x++){
-        for (int y = 0; y < bw; y++){
-          if(a[hs[x]][ws[y]] != b[x][y]) {
+      for (int i = 0; i < h2; i++) {
+        for (int j = 0; j < w2; j++) {
+          if(a[H[i]][W[j]] != b[i][j]) {
             ok = false;
             break;
-          }
+          };
         }
       }
       if(ok) {

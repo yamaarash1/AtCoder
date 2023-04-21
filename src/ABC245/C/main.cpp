@@ -12,50 +12,37 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
-  int n, k;
+int n,k;
+int a[200009], b[200009];
+int ok = false;
+void dfs(int x, int cnt)
+{
+  if(cnt == n - 1) {
+    ok = true;
+    return;
+  }
+  if(abs(x - a[cnt+1]) <= k) {
+    dfs(a[cnt+1], cnt+1);
+  }
+  if(abs(x - b[cnt+1]) <= k) {
+    dfs(b[cnt+1], cnt+1);
+  }
+  return;
+}
+int main() { 
   cin >> n >> k;
-  int A[n], B[n];
-  for (int i = 0; i < n; i++)
-  {
-    cin >> A[i];
+  for (int i = 0; i < n;i++){
+    cin >> a[i];
   }
   for (int i = 0; i < n;i++){
-    cin >> B[i];
+    cin >> b[i];
   }
-  int dp[n][2];
-  for (int i = 0; i < n; i++){
-    for (int j = 0; j < 2; j++){
-      dp[i][j] = -1;
-    }
-  }
-  dp[0][0] = 1;
-  dp[0][1] = 1;
-  for (int i = 1; i < n; i++)
-  {
-    int aa = abs(A[i] - A[i - 1]);
-    int ab = abs(B[i] - A[i - 1]);
-    int ba = abs(A[i] - B[i - 1]);
-    int bb = abs(B[i] - B[i - 1]);
-    if (dp[i-1][0] == 1){
-      if (aa <= k){
-        dp[i][0] = 1;
-      }
-      if (ab <= k){
-        dp[i][1] = 1;
-      }
-    }
-    if (dp[i-1][1] == 1){
-      if (ba <= k){
-        dp[i][0] = 1;
-      }
-      if (bb <= k){
-        dp[i][1] = 1;
-      }
-    }
-  }
-  if(dp[n-1][0] == 1 || dp[n-1][1] == 1) cout<<"Yes"<<endl;
+  dfs(a[0], 0);
+  dfs(b[0], 0);
+  if(ok) cout << "Yes" << endl;
   else cout << "No" << endl;
   return 0;
 }

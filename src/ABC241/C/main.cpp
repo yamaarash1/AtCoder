@@ -12,83 +12,76 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
   int n;
   cin >> n;
-  char S[n][n];
-  int dp[n][n];
-  for (int i = 0; i < n; i++)
-  {
+  char cell[n][n];
+  for (int i = 0; i < n;i++){
     string s;
     cin >> s;
-    for (int j = 0; j < n; j++){
-      if(s[j] == '#')
-        dp[i][j] = 1;
-      else
-        dp[i][j] = 0;
+    for (int j = 0; j < n;j++){
+      cell[i][j] = s[j];
     }
   }
-  int count = 0;
-  bool ans = false;
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < n; j++){
-
-      if(i+5 < n) {
-        count = 0;
-        for (int k = 0; k < 6;k++){
-          if(dp[i+k][j]){
-            count++;
-          }
-          if(count >=4){
-            ans = true;
-            break;
-          }
+  for (int i = 0; i <= n - 6; i++) {
+    for (int j = 0; j <= n - 6; j++) {
+      int b_lean = 0;
+      for (int k = 0; k < 6; k++) {
+        if(cell[i + k][j + k] == '#') {
+          b_lean++;
         }
       }
-
-      if(j+5 < n) {
-        count = 0;
-        for (int k = 0; k < 6;k++){
-          if(dp[i][j+k]){
-            count++;
-          }
-          if(count >=4){
-            ans = true;
-            break;
-          }
-        }
-      }
-
-      if(i+5 < n && j+5 < n) {
-        count = 0;
-        for (int k = 0; k < 6;k++){
-          if(dp[i+k][j+k]){
-            count++;
-          }
-          if(count >=4){
-            ans = true;
-            break;
-          }
-        }
-      }
-
-      if(i-5 >=0 && j+5 < n) {
-        count = 0;
-        for (int k = 0; k < 6;k++){
-          if(dp[i-k][j+k]){
-            count++;
-          }
-          if(count >=4){
-            ans = true;
-            break;
-          }
-        }
+      if(b_lean >= 4) {
+        cout << "Yes" << endl;
+        return 0;
       }
     }
   }
-  if(ans) cout << "Yes" << endl;
-  else cout << "No" << endl;
+  for (int i = 0; i <= n - 6; i++) {
+    for (int j = 0; j < n; j++) {
+      int b_down = 0;
+      for (int k = 0; k < 6; k++) {
+        if(cell[i + k][j] == '#') {
+          b_down++;
+        }
+      }
+      if(b_down >= 4) {
+        cout << "Yes" << endl;
+        return 0;
+      }
+    }
+  }
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j <= n - 6; j++) {
+      int b_right = 0;
+      for (int k = 0; k < 6; k++) {
+        if(cell[i][j + k] == '#') {
+          b_right++;
+        }
+      }
+      if(b_right >= 4) {
+        cout << "Yes" << endl;
+        return 0;
+      }
+    }
+  }
+  for (int i = 5; i < n; i++) {
+    for (int j = 0; j <= n - 6; j++) {
+      int b_lean = 0;
+      for (int k = 0; k < 6; k++) {
+        if(cell[i - k][j + k] == '#') {
+          b_lean++;
+        }
+      }
+      if(b_lean >= 4) {
+        cout << "Yes" << endl;
+        return 0;
+      }
+    }
+  }  
+  cout << "No" << endl;
   return 0;
 }

@@ -12,41 +12,34 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
 int main() {
   int n, k;
   cin >> n >> k;
-  int p[n],p_s[n];
-  bool p_e[n+1];
-  for (int i = 0; i < n; i++){
-    cin >> p[i];
+  int a[n];
+  for(int i = 0; i < n; i++) {
+    cin >> a[i];
   }
-  for (int i = 0; i <= n; i++){
-    p_e[i] = false;
+  set<int, greater<int>> b;
+  for (int i = 0; i < k; i++) {
+    b.insert(a[i]);
   }
-  for (int i = 0; i < k; i++){
-    p_e[p[i]] = true;
+
+  for (int i = k - 1; i < n; i++)
+  {
+    auto it = b.begin();
+    cout << "start " << *it << endl;
+    advance(it, 5);
+    if(i != k - 1) {
+      b.insert(a[i]);
+    }
+    for(auto x : b) {
+      cout << x << " ";
+    }
+    cout << endl;
+    cout << *it << endl;
   }
-  for (int i = 0; i <= n;i++){
-  }
-    // int m;
-    // int o = 0;
-    // while(!p_e[p_s[o]]){
-    //   o++;
-    // }
-    // m = p_s[o];
-    // cout << m << endl;
-    // for (int i = k; i < n; i++)
-    //{
-    //   p_e[p[i]] = true;
-    //   if(p[i] > m){
-    //     o++;
-    //     while(!p_e[p_s[o]]){
-    //       o++;
-    //     }
-    //     m = p_s[o];
-    //   }
-    //   cout << m << endl;
-    // }
-    return 0;
+  return 0;
 }

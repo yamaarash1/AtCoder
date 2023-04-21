@@ -12,26 +12,17 @@
 using namespace std;
 #define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
-  ll N;
-  cin >> N;
-  ll max3 = cbrt(N);
+int main() { 
+  ll n;
+  cin >>n;
   ll ans = 0;
-  bool jump = false;
-  for (ll i = 1; i <= max3; i++) {
-    ll count = 0;
-    for (ll j = i; j <= sqrt(N/i); j++) {
-      if (i * j == N){
-        jump = true;
-        break;
-      }
-      ll AB = i * j;
-      ll pos = N / AB;
-      ans +=  N / i / j - j + 1;
-      count++;
+  for (ll i = 1; i * i * i <= n;i++){
+    for (ll j = i; i * j * j <= n;j++){
+      ans += (n / (i * j)) - j + 1;
     }
-    if (jump) break;
   }
   cout << ans << endl;
   return 0;

@@ -12,37 +12,31 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-int n, x;
-int a[109], b[109];
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+
 int main() {
+  int n, x;
   cin >> n >> x;
-  for (int i = 0; i < n;i++){
+  int a[n+1], b[n+1];
+  for (int i = 1;i<=n;i++){
     cin >> a[i] >> b[i];
   }
-  int dp[n][x+1];
-  for (int i = 0; i < n; i++){
-    for (int j = 0; j <= x;j++){
-      dp[i][j] = 0;
-    }
-  }
-  dp[0][a[0]] = 1;
-  dp[0][b[0]] = 1;
-  for (int i = 0; i < n-1; i++)
-  {
-    for (int j = 0; j <= x; j++){
-      if(dp[i][j] && j + a[i+1] <= x){
-        dp[i+1][j + a[i+1]] = 1;
-      }
-      if(dp[i][j] && j + b[i+1] <= x){
-        dp[i+1][j + b[i+1]] = 1;
+  vector<vector<int>> dp(n + 1, vector<int>(x + 1, 0));
+  dp[0][0] = 1;
+  for (int i = 1;i <= n;i++){
+    for (int j = 0;j <= x;j++){
+      if(dp[i-1][j] == 1) {
+        if(j + a[i] <= x)
+          dp[i][j + a[i]] = 1;
+        if(j + b[i] <= x)
+          dp[i][j + b[i]] = 1;
       }
     }
   }
-
-  if(dp[n-1][x]){
+  if(dp[n][x] == 1)
     cout << "Yes" << endl;
-  }else{
+  else
     cout << "No" << endl;
-  }
   return 0;
 }

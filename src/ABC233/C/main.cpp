@@ -12,38 +12,52 @@
 using namespace std;
 #define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 ll n, x;
-ll ans = 0;
-vector<vector<ll>> a;
-void dfs(ll depth, ll res)
+vector<vector<ll>> L(100000);
+vector<ll> nums;
+void calc(ll o)
 {
-  if (depth == n)
-  {
-    if(res==x)
-    ans = ans + 1;
+  if(o == n) {
     return;
   }
-  for (ll c:a[depth])
-  {
-    if(res>x/c)continue;
-    dfs(depth + 1, res * c);
+  vector<ll> tmp;
+  for (ll i = 0; i < L[o].size();i++){
+    for (ll j = 0; j < nums.size();j++){
+      tmp.push_back(L[o][i] * nums[j]);
+    }
   }
+  for (ll i = 0; i < tmp.size();i++){
+    cout << tmp[i] << endl;
+  }
+    nums = tmp;
+  calc(o + 1);
 }
 
 int main() {
   cin >> n >> x;
-  a.resize(n);
-  for (ll i = 0; i < n; i++)
-  {
-    ll l;
-    cin >> l;
-    a[i].resize(l);
-    for (ll j = 0; j < l; j++)
-    {
-      cin >> a[i][j];
+  for (ll i = 0; i < n;i++){
+    ll num;
+    cin >> num;
+    for (ll j = 0; j < num;j++){
+      ll a;
+      cin >> a;
+      L[i].push_back(a);
     }
   }
-  dfs(0, 1);
+  for (ll i = 0; i < L[0].size();i++){
+    nums.push_back(L[0][i]);
+  }
+  calc(1);
+  ll ans = 0;
+  for (ll i = 0; i < nums.size(); i++)
+  {
+    //cout << nums[i] << endl;
+    if(nums[i] == x) {
+      ans++;
+    }
+  }
   cout << ans << endl;
   return 0;
 }

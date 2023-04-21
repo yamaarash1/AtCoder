@@ -12,59 +12,39 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-
-struct human{
-  int x;
-  int y;
-  char d;
-};
-
-bool x_cmp(const struct human& p, const struct human& q) {
-  return p.x < q.x;
-}
-
-int main()
-{
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+// 衝突: a.x < b.xのとき、a.y == b.y かつ a.dir = 'R', b.dir = 'L'のとき
+int main() { 
   int n;
   cin >> n;
+  tuple<int, int, char> axis[n];
   int x[n], y[n];
-  set<int> y_v;
-  for (int i = 0; i < n; i++)
-  {
+  for (int i = 0; i < n; i++) {
     cin >> x[i] >> y[i];
-    y_v.insert(y[i]);
   }
   string s;
   cin >> s;
-  char d[n];
-  human p[n];
-  for (int i = 0; i < n; i++)
-  {
-    p[i] = {x[i], y[i], s[i]};
-  }
-  sort(p, p+n, x_cmp);
-  map<int, set<char>> m;
   for (int i = 0; i < n;i++){
-    cout << i << " " << p[i].x << " " << p[i].y << " " << p[i].d << endl;
-    m[p[i].x].insert(p[i].d);
+    axis[i] = make_tuple(x[i], y[i], s[i]);
   }
-  for(auto a : m[1]){
-    cout << a << " ";
+  sort(axis, axis + n);
+  map<int, string> m;
+  for (int i = 0;i < n; i++){
+    m[get<1>(axis[i])] += get<2>(axis[i]);
   }
-  cout <<endl;
-  for (auto a : y_v)
-  {
-    string ans = "";
-    for (auto b : m[a])
-    {
-      cout << b <<endl;
+  //for(auto p : m) {
+  //  cout << p.first << ": " << p.second << endl;
+  //}
+  for(auto p : m) {
+    for (int i = 0;i < p.second.size();i++){
+      if(p.second[i] == 'R') {
+        if(p.second[i+1] == 'L') {
+          cout << "Yes" << endl;
+          return 0;
+        }
+      }
     }
-    if (ans == "RL")
-    {
-      cout << "Yes" << endl;
-      return 0;
-    }
-    cout << ans << endl;
   }
   cout << "No" << endl;
   return 0;

@@ -9,58 +9,63 @@
 #include <vector>
 #include <set>
 #include <iomanip>
-#include <numeric>
-#include <array>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+int n, m;
+vector<vector<int>> taka(10);
+vector<vector<int>> aoki(10);
+vector<bool> visited(10);
+bool ok = true;
 
-int main() {
-  int n, m;
-  cin >> n >> m;
-  vector<int> arr(n);
-  iota(begin(arr), end(arr), 0);
-  bool ab[n][n];
-  bool cd[n][n];
-  for (int i = 0; i < n; i++){
-    for (int j = 0; j < n; j++){
-      ab[i][j] = false;
-      cd[i][j] = false;
+void dfs(int num)
+{
+  visited[num] = true;
+  if(taka[num].size() != aoki[num].size()){
+    ok = false;
+    return;
+  }
+  for (int i = 0; i < taka[num].size(); i++) {
+    if (visited[taka[num][i]])
+      continue;
+    if (taka[num][i] != aoki[num][i]) {
+      ok = false;
+      return;
     }
+    dfs(taka[num][i]);
+  }
+}
+int main()
+{
+  cin >> n >> m;
+  for (int i = 0; i < m; i++)
+  {
+    int a, b;
+    cin >> a >> b;
+    taka[a].push_back(b);
+    taka[b].push_back(a);
   }
   for (int i = 0; i < m; i++)
   {
     int a, b;
     cin >> a >> b;
-    a--;
-    b--;
-    ab[a][b] = true;
-    ab[b][a] = true;
+    aoki[a].push_back(b);
+    aoki[b].push_back(a);
   }
-  for (int i = 0; i < m; i++){
-    int c, d;
-    cin >> c >> d;
-    c--;
-    d--;
-    cd[c][d] = true;
-    cd[d][c] = true;
+  for (int i = 0;i<n;i++){
+    sort(aoki[i].begin(), aoki[i].end());
+    sort(taka[i].begin(), taka[i].end());
   }
-  do
+  dfs(1);
+  if (ok)
   {
-    bool ok = true;
-    for (int i = 0; i < n; i++)
-    {
-      for (int j = 0; j < n; j++) {
-          if (ab[i][j] != cd[arr[i]][arr[j]]) {
-              ok = false;
-          }
-      }
-    }
-  if (ok) {
     cout << "Yes" << endl;
-    return 0;
   }
-  } while (next_permutation(begin(arr), end(arr)));
-  cout << "No" << endl;
+  else
+  {
+    cout << "No" << endl;
+  }
   return 0;
 }

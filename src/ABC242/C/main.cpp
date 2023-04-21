@@ -12,30 +12,44 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
-#define mod 998244353
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
+#define mod 998244353;
 
 int main() {
   int n;
   cin >> n;
-  int dp[n + 1][10] = {0};
-  for (int i = 1; i <= 9; i++)
-  {
+  vector<vector<int>> dp(n + 1, vector<int>(10, 0));
+  for (int i = 1;i <= 9; i++){
     dp[1][i] = 1;
   }
-  for (int i = 2; i <= n;i++){
-    for (int j = 1; j < 10;j++){
-      for (int k = max(1, j - 1); k <= min(9, j + 1);k++){
-        dp[i][j] += dp[i - 1][k];
-        dp[i][j] %= mod;
+  for (int i = 1; i < n; i++){
+    for(int j = 1; j <= 9; j++){
+      if(j == 1) {
+        dp[i + 1][j] += dp[i][j];
+        dp[i + 1][j] %= mod;
+        dp[i + 1][j] += dp[i][j + 1];
+        dp[i + 1][j] %= mod;
+      } else if (j == 9) {
+        dp[i + 1][j] += dp[i][j];
+        dp[i + 1][j] %= mod;
+        dp[i + 1][j] += dp[i][j - 1];
+        dp[i + 1][j] %= mod;
+      } else {
+        dp[i + 1][j] = dp[i][j];
+        dp[i + 1][j] %= mod;
+        dp[i + 1][j] += dp[i][j - 1];
+        dp[i + 1][j] %= mod;
+        dp[i + 1][j] += dp[i][j + 1];
+        dp[i + 1][j] %= mod;
       }
     }
   }
-  int res = 0;
-  for (int i = 1; i <= 9; i++)
-  {
-    res += dp[n][i];
-    res %= mod;
+  int ans = 0;
+  for (int i = 1; i <= 9; i++){
+    ans = (ans + dp[n][i]) % mod;
   }
-  cout << res << endl;
+  ans %= mod;
+  cout << ans << endl;
   return 0;
 }

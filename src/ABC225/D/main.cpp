@@ -11,62 +11,51 @@
 #include <iomanip>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
+typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
-  int N, Q;
-  cin >> N >> Q;
-  string s;
-  for (int i = 0; i <= N;i++){
-    s += to_string(i);
-  }
-  
-  vector<tuple<int, int, int>> q;
-  int num, x, y;
-  for (int i = 0; i < Q; i++) {
-    cin >> num >> x;
-    if (num != 3) {
-      cin >> y;
-    }else{
-      y = -1;
+int main() { 
+  int n,q;
+  cin >> n >> q;
+  vector<int> front(n+1, -1);
+  vector<int> back(n+1, -1);
+  while (q--)
+  {
+    int num;
+    cin >> num;
+    if(num == 1) {
+      int x, y;
+      cin >> x >> y;
+      front[y] = x;
+      back[x] = y;
+    } else if (num == 2) {
+      int x, y;
+      cin >> x >> y;
+      back[x] = -1;
+      front[y] = -1;
+    } else {
+      int x;
+      cin >> x;
+      vector<int> ans;
+      int frontest = x;
+      while (1) {
+        if(front[frontest] == -1)
+          break;
+        frontest = front[frontest];
+      }
+      int order = frontest;
+      while (order != -1 || order == frontest) {
+        ans.push_back(order);
+        order = back[order];
+      }
+      cout << ans.size() << " ";
+      for (auto i : ans)
+      {
+        cout << i << " ";
+      }
+      cout << endl;
     }
-    q.emplace_back(num, x, y);
   }
-    // pair<int, int> G[N];
-    // for (int i = 1; i <= N;i++){
-    //   G[i].first = -1; //前
-    //   G[i].second = -1; //後
-    // }
-    // vector<tuple<int, int, int>> q;
-    // int num, x, y;
-    // for (int i = 0; i < Q; i++) {
-    //   cin >> num >> x;
-    //   if (num != 3) {
-    //     cin >> y;
-    //   }else{
-    //     y = -1;
-    //   }
-    //   q.emplace_back(num, x, y);
-    // }
-    //   for (int i = 0; i < Q; i++) {
-    //     if (num == 1) {
-    //       G[get<1>(q[i])].second = get<2>(q[i]);
-    //       G[get<2>(q[i])].first =  get<1>(q[i]);
-    //     }
-    //     if (num == 2) {
-    //       G[get<1>(q[i])].second = -1;
-    //       G[get<2>(q[i])].first = -1;
-    //     }
-    //     if (num == 3) {
-    //       int u = get<1>(q[i]);
-    //       while (G[u].first != -1) {
-    //         u = G[u].first;
-    //       }
-    //       while (G[u].second != -1) {
-    //         cout << u << " ";
-    //         u = G[u].second;
-    //       }
-    //       cout << endl;
-    //     }
-    //   }
-    return 0;
+  return 0; 
 }

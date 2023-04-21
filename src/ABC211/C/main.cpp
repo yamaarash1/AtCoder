@@ -12,38 +12,26 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 typedef long long ll;
+#define I_MAX 2147483647;
+#define LL_MAX 9223372036854775806;
 
-int main() {
-  string S;
-  string T = "chokudai";
-  const int mod = 1000000007;
-  cin >> S;
-  int n = S.size();
-  int dp[n + 1][9];
-  for (int i = 0; i < n+1; i++) {
-    for (int j = 0; j < 9;j++){
-      dp[i][j] = 0;
+int main() { 
+  string s;
+  cin >> s;
+  string chokudai = "chokudai";
+  map<int, char> chokudai_map;
+  map<char, int> mp;
+  for (int i = 0; i < chokudai.length(); i++) {
+    chokudai_map[chokudai[i]] = i;
+  }
+  for (int i = 0; i < s.length(); i++){
+    if(s[i] == 'c') {
+      mp[s[i]]++;
+    } else {
+      mp[s[i]] += mp[chokudai[chokudai_map[s[i]] - 1]];
     }
   }
-  for (int i = 0; i < S.length()+1; i++) {
-    dp[i][0] = 1;
-  }
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < 9;j++){
-      if(S[i]==T[j]){
-        dp[i+1][j+1] = (dp[i][j] + dp[i][j+1]) % mod;
-      }else{
-        dp[i+1][j+1] = dp[i][j+1];
-      }
-    }
-  }
-  //for (int i = 0; i < n+1; i++) {
-  //  for (int j = 0; j < 9;j++){
-  //    cout << dp[i][j] << " ";
-  //  }
-  //  cout << endl;
-  //}
-
-  cout << dp[n][8] << endl;
+  int ans = mp['i'];
+  cout << ans << endl;
   return 0;
 }
