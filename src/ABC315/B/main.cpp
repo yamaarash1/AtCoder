@@ -33,5 +33,27 @@ typedef long long ll;
 
 
 int main() { 
+  int m;
+  in(m);
+  int d[m];
+  int sum = 0;
+  rep(i,m) {
+    in(d[i]);
+    sum += d[i];
+  }
+  if(m == 1) {
+    if(d[0] == 1) {
+      outl2(1, 1);
+      return 0;
+    }
+  }
+  int mid = (sum + 1) / 2;
+  int cnt = 0;
+  while(mid > d[cnt]) {
+    mid -= d[cnt];
+    cnt++;
+  }
+  int day = mid;
+  outl2(cnt + 1, day);
   return 0; 
 }

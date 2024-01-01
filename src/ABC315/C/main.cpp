@@ -33,5 +33,53 @@ typedef long long ll;
 
 
 int main() { 
+  int n;
+  in(n);
+  vector<pair<int,int>> fs;
+  int max_f = 0;
+  int max_s = 0;
+  rep(i,n) {
+    int f,s;
+    in2(f,s);
+    fs.push_back(make_pair(f,s));
+    if(max_s < s) {
+      max_s = s;
+      max_f = f;
+    }
+  }
+
+  //異なる時の最大値
+  map<int, int> max_m;
+  rep(i,n) {
+    if(max_m[fs[i].first] < fs[i].second) {
+      max_m[fs[i].first] = fs[i].second;
+    }
+  }
+  vector<int> list;
+  for(auto x: max_m) {
+    list.push_back(x.second);
+  }
+  sort(all(list));
+  int ans_1 = list[list.size()-1] + list[list.size()-2];
+
+  //同じの時の最大値
+  vector<int> max_f_list;
+  rep(i,n) {
+    if(max_f == fs[i].first) {
+      max_f_list.push_back(fs[i].second);
+    }
+  }
+  //for(auto x: max_f_list) {
+  //  outl(x);
+  //}
+  int ans_2 = 0;
+  if(max_f_list.size() > 1) {
+    sort(max_f_list.begin(), max_f_list.end());
+    ans_2 = max_f_list[max_f_list.size()-1] + max_f_list[max_f_list.size()-2] / 2;
+  }
+
+  //outl2(ans_1, ans_2);
+  int ans = max(ans_1, ans_2);
+  outl(ans);
   return 0; 
 }

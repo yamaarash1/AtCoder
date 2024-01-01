@@ -10,6 +10,12 @@ new:
 	mkdir -p ./src/${path}
 	cp -r ./src/sample/* ./src/${path}
 	echo ${path} > tmppath
+	code ./src/${path}/main.cpp
+
+new_old:
+	mkdir -p ./src/${path}
+	cp -r ./src/sample/* ./src/${path}
+	echo ${path} > tmppath
 	code ./src/${path}/main.cpp ./src/${path}/*.in ./src/${path}/*.out
 
 set:

@@ -14,9 +14,9 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define repab(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
 #define reprab(i, a, b) for (int i = (int)(a); i >= (int)(b); i--)
-#define repabc(i, a, b, c) for (int i = (int)(a); int (b) < (int)(c); i++)
-#define all(a)  (a).begin(),(a).end()
-#define allr(a)  (a).rbegin(),(a).rend()
+#define repabc(i, a, b, c) for (int i = (int)(a); int(b) < (int)(c); i++)
+#define all(a) (a).begin(), (a).end()
+#define allr(a) (a).rbegin(), (a).rend()
 #define in(x) cin >> x
 #define in2(x, y) cin >> x >> y
 #define in3(x, y, z) cin >> x >> y >> z
@@ -31,7 +31,27 @@ using namespace std;
 #define LL_MAX 9223372036854775806;
 typedef long long ll;
 
-
-int main() { 
-  return 0; 
+int main()
+{
+  int n, m;
+  in2(n, m);
+  int a[m];
+  rep(i, m)
+  {
+    in(a[i]);
+  }
+  pair<int, int> max_pair = make_pair(n, 0); // {a,b}: aは人の番号、bは票数（最大値を保存）
+  map<int, int> mp;                          // mp[a] = b: aは人の番号、bはその人の票数
+  rep(i, m)
+  {
+    mp[a[i]]++;
+    if(max_pair.second == mp[a[i]] && max_pair.first > a[i]) {
+      max_pair = make_pair(a[i], mp[a[i]]);
+    }
+    if(max_pair.second < mp[a[i]]) {
+      max_pair = make_pair(a[i], mp[a[i]]);
+    }
+    outl(max_pair.first);
+  }
+  return 0;
 }

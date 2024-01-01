@@ -31,7 +31,34 @@ using namespace std;
 #define LL_MAX 9223372036854775806;
 typedef long long ll;
 
+//右回転
+//配列:p, n(i):行数, m(j):列数
+map<int, map<int, char>> rotate90(map<int, map<int,char>> p, int N, int M){
+  map<int, map<int,char>> q;
+    for(int n = 0;n < M; n++){
+      for(int m = 0;m < N; m++){
+        q[n][m] = p[N - 1 - m][n];
+      }
+    }
+  return q;
+}
 
-int main() { 
-  return 0; 
+map<int, map<int, char>> rotate180(map<int, map<int,char>> p, int N, int M){
+  map<int, map<int,char>> q;
+    for(int n = 0;n < N; n++){
+      for(int m = 0;m < M; m++){
+        q[n][m] = p[N - 1 - n][M - 1 - m];
+      }
+    }
+  return q;
+}
+
+map<int, map<int, char>> rotate270(map<int, map<int,char>> p, int N, int M){
+  map<int, map<int,char>> q;
+    for(int n = 0;n < M; n++){
+      for(int m = 0;m < N; m++){
+        q[n][m] = p[m][M - 1 - n];
+      }
+    }
+  return q;
 }

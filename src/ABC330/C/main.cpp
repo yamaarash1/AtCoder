@@ -11,12 +11,12 @@
 #include <iomanip>
 #include <stack>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define repab(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
-#define reprab(i, a, b) for (int i = (int)(a); i >= (int)(b); i--)
-#define repabc(i, a, b, c) for (int i = (int)(a); int (b) < (int)(c); i++)
-#define all(a)  (a).begin(),(a).end()
-#define allr(a)  (a).rbegin(),(a).rend()
+#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
+#define repab(i, a, b) for (ll i = (ll)(a); i < (ll)(b); i++)
+#define reprab(i, a, b) for (ll i = (ll)(a); i >= (ll)(b); i--)
+#define repabc(i, a, b, c) for (ll i = (ll)(a); ll(b) < (ll)(c); i++)
+#define all(a) (a).begin(), (a).end()
+#define allr(a) (a).rbegin(), (a).rend()
 #define in(x) cin >> x
 #define in2(x, y) cin >> x >> y
 #define in3(x, y, z) cin >> x >> y >> z
@@ -31,7 +31,17 @@ using namespace std;
 #define LL_MAX 9223372036854775806;
 typedef long long ll;
 
-
-int main() { 
-  return 0; 
+int main()
+{
+  ll d;
+  in(d);
+  ll ans = d;
+  for (ll x = 1; x * x <= d; x++) {
+    ll c = - d + x * x;
+    ll floor_c = floor(sqrt(-c));
+    ll ceil_c = ceil(sqrt(-c));
+    ans = min(ans, min(abs(floor_c * floor_c + x * x - d), abs(ceil_c * ceil_c + x * x - d)));
+  }
+  outl(ans);
+  return 0;
 }

@@ -33,5 +33,40 @@ typedef long long ll;
 
 
 int main() { 
+  int n;
+  in(n);
+  vector<string> s;
+  rep(i, n) {
+    string tmp;
+    in(tmp);
+    s.push_back(tmp);
+  }
+  map<int, int> row; //横
+  map<int, int> col; //縦
+  rep(i, n){
+    rep(j ,n) {
+      if(s[i][j] == 'o') {
+        row[i]++;
+        col[j]++;
+      }
+    }
+  }
+  //for(auto x : row) {
+  //  outl2(x.first, x.second);
+  //}
+  //for(auto x : col) {
+  //  outl2(x.first, x.second);
+  //}
+  int ans = 0;
+  rep(i, n){
+    rep(j ,n) {
+      if(s[i][j] == 'x') continue;
+      if(row[i] >= 2 && col[j] >= 2) {
+        cout << i << " " << j << ": " << row[i] << " " << col[j] << endl;
+        ans += (row[i] - 1) * (col[j] - 1);
+      }
+    }
+  }
+  outl(ans);
   return 0; 
 }

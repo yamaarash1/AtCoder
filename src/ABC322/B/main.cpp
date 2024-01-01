@@ -33,5 +33,31 @@ typedef long long ll;
 
 
 int main() { 
+  int n,m;
+  in2(n,m);
+  string s,t;
+  in2(s,t);
+  // 接頭辞かどうか
+  bool isPrefix = true;
+  for(int i = 0;i<s.length(); i++){
+    if(s[i] != t[i]) {
+      isPrefix = false;
+      break;
+    }
+  }
+  // 接尾語かどうか
+  bool isSuffix = true;
+  int o = 0;
+  for(int i = t.length() - s.length();i<t.length(); i++){
+    if(s[o] != t[i]) {
+      isSuffix = false;
+      break;
+    }
+    o++;
+  }
+  if(isPrefix && isSuffix) outl(0);
+  else if(isPrefix && !isSuffix) outl(1);
+  else if(!isPrefix && isSuffix) outl(2);
+  else outl(3);
   return 0; 
 }

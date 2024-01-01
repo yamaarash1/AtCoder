@@ -33,5 +33,8 @@ typedef long long ll;
 
 
 int main() { 
+  int n,k,p;
+  in3(n,k,p);
+  
   return 0; 
 }

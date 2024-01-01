@@ -33,5 +33,27 @@ typedef long long ll;
 
 
 int main() { 
+  string s;
+  in(s);
+  deque<char> dq;
+  rep(i,s.size()) {
+    dq.push_back(s[i]);
+    if(dq.size() <= 2) continue;
+    auto itr = dq.rbegin();
+    char c1 = *itr;
+    itr++;
+    char c2 = *itr;
+    itr++;
+    char c3 = *itr;
+    if(c3 == 'A' && c2 == 'B' && c1 == 'C') {
+      dq.pop_back();
+      dq.pop_back();
+      dq.pop_back();
+    }
+  }
+  for(auto x : dq) {
+    out(x);
+  }
+  outl("");
   return 0; 
 }

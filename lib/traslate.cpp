@@ -31,7 +31,13 @@ using namespace std;
 #define LL_MAX 9223372036854775806;
 typedef long long ll;
 
-
-int main() { 
-  return 0; 
+// 平行移動
+map<int, map<int, char>> translate(map<int, map<int,char>> p, int N, int M, int a, int b){
+  map<int, map<int,char>> q;
+    for(int n = 0;n < M; n++){
+      for(int m = 0;m < N; m++){
+        q[n][m] = p[n + a][m + b];
+      }
+    }
+  return q;
 }

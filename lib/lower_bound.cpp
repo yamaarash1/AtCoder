@@ -33,5 +33,20 @@ typedef long long ll;
 
 
 int main() { 
+  int n,q;
+  in2(n,q);
+  string s;
+  in(s);
+  vector<int> list;
+  int l,r;
+  in2(l,r);
+  auto Iter1 = lower_bound(all(list), l);
+  auto Iter2 = lower_bound(all(list), r);
+  //値の表示
+  cout << "Iter1 = " << *Iter1 << endl; //Iter1 = 4
+  //先頭からの距離
+  cout << "Iter1 = " << Iter1 - list.begin() << endl; //Iter1 = 1
+  //末尾までの距離
+  cout << "Iter1 = " << list.end() - Iter1 << endl; //Iter1 = 9 
   return 0; 
 }

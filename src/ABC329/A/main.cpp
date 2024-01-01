@@ -14,9 +14,9 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define repab(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
 #define reprab(i, a, b) for (int i = (int)(a); i >= (int)(b); i--)
-#define repabc(i, a, b, c) for (int i = (int)(a); int (b) < (int)(c); i++)
-#define all(a)  (a).begin(),(a).end()
-#define allr(a)  (a).rbegin(),(a).rend()
+#define repabc(i, a, b, c) for (int i = (int)(a); int(b) < (int)(c); i++)
+#define all(a) (a).begin(), (a).end()
+#define allr(a) (a).rbegin(), (a).rend()
 #define in(x) cin >> x
 #define in2(x, y) cin >> x >> y
 #define in3(x, y, z) cin >> x >> y >> z
@@ -31,7 +31,18 @@ using namespace std;
 #define LL_MAX 9223372036854775806;
 typedef long long ll;
 
-
-int main() { 
-  return 0; 
+int main()
+{
+  string s;
+  in(s);
+  rep(i, s.length())
+  {
+    out(s[i]);
+    if(s.length() - 1 != i) {
+      out(" ");
+    } else {
+      outl("");
+    }
+  }
+  return 0;
 }

@@ -33,5 +33,25 @@ typedef long long ll;
 
 
 int main() { 
+  int n,q;
+  in2(n,q);
+  string s;
+  in(s);
+  vector<int> list;
+  for(int i = 0;i<n-1;i++){
+    if(s[i] == s[i+1]) {
+      list.push_back(i);
+    }
+  }
+  while(q--) {
+    int l,r;
+    in2(l,r);
+    l--;
+    r--;
+    auto Iter1 = lower_bound(all(list), l);
+    auto Iter2 = lower_bound(all(list), r);
+    int ans = Iter2 - Iter1;
+    outl(ans);
+  }
   return 0; 
 }

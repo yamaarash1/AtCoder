@@ -33,5 +33,9 @@ typedef long long ll;
 
 
 int main() { 
+  int n,m;
+  in2(n,m);
+  string s,t;
+  in2(s,t);
   return 0; 
 }

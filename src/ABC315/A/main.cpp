@@ -33,5 +33,14 @@ typedef long long ll;
 
 
 int main() { 
+  string s;
+  in(s);
+  rep(i, s.length()) {
+    if(s[i] == 'a' || s[i] == 'i' || s[i] == 'u' || s[i] == 'e' || s[i] == 'o') {
+      continue;
+    }
+    out(s[i]);
+  }
+  outl("");
   return 0; 
 }

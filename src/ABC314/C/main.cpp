@@ -33,5 +33,27 @@ typedef long long ll;
 
 
 int main() { 
+  int n,m;
+  in2(n,m);
+  string s;
+  in(s);
+  map<int, vector<int>> mp;
+  int c[n];
+  rep(i, n) {
+    int tmp;
+    in(tmp);
+    mp[tmp].push_back(i);
+  }
+  char t[n];
+  for(auto m: mp) {
+    rep(i, m.second.size()) {
+      int order = i - 1 < 0 ? m.second.size() - 1 : i - 1;
+      t[m.second[i]] = s[m.second[order]];
+    }
+  }
+  rep(i, n) {
+    out(t[i]);
+  }
+  outl("");
   return 0; 
 }
